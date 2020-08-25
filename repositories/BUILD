@@ -31,6 +31,12 @@ bzl_library(
 )
 
 bzl_library(
+    name = "multiarch_http_file_bzl",
+    srcs = ["multiarch_http_file.bzl"],
+    visibility = ["//visibility:private"],
+)
+
+bzl_library(
     name = "repositories_bzl",
     srcs = ["repositories.bzl"],
     visibility = ["//visibility:private"],
