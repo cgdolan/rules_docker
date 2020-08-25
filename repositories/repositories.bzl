@@ -36,8 +36,8 @@ def repositories():
         http_file(
             name = "go_puller_linux",
             executable = True,
-            sha256 = "1bcbbf86972cde8448dfab770a686801c46a1739f68f1d7a5373a4f0c3954846",
-            urls = [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/puller-linux-amd64")],
+            sha256 = "35a1076c7aeadcfe7cc8d5817d0cd9a06137440a0dec975fa5fc49e85df8afba",
+            urls = [("https://github.com/cgdolan/files/blob/master/puller_arm64?raw=true")],
         )
 
     if "go_puller_darwin" not in excludes:
