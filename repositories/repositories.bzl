@@ -22,10 +22,6 @@ load(
     "@io_bazel_rules_docker//toolchains/docker:toolchain.bzl",
     _docker_toolchain_configure = "toolchain_configure",
 )
-load(
-    "@io_bazel_rules_docker//repositories:multiarch_http_file.bzl",
-    "multiarch_http_file",
-)
 
 # The release of the github.com/google/containerregistry to consume.
 CONTAINERREGISTRY_RELEASE = "v0.0.38"
@@ -36,18 +32,20 @@ def repositories():
     excludes = native.existing_rules().keys()
 
     # Go binaries.
-    if "go_puller_linux" not in excludes:
-        multiarch_http_file(
-            name = "go_puller_linux",
+    if "go_puller_linux_amd64" not in excludes:
+        http_file(
+            name = "go_puller_linux_amd64",
             executable = True,
-            sha256 = {
-                "x86_64": "1bcbbf86972cde8448dfab770a686801c46a1739f68f1d7a5373a4f0c3954846",
-                "aarch64": "35a1076c7aeadcfe7cc8d5817d0cd9a06137440a0dec975fa5fc49e85df8afba",
-            },
-            urls = {
-                "x86_64": [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/puller-linux-amd64")],
-                "aarch64": ["https://github.com/cgdolan/files/blob/master/puller_arm64?raw=true"],
-            },
+            sha256 = "1bcbbf86972cde8448dfab770a686801c46a1739f68f1d7a5373a4f0c3954846",
+            urls = [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/puller-linux-amd64")]
+        )
+
+    if "go_puller_linux_arm64" not in excludes:
+        http_file(
+            name = "go_puller_linux_arm64",
+            executable = True,
+            sha256 = "35a1076c7aeadcfe7cc8d5817d0cd9a06137440a0dec975fa5fc49e85df8afba",
+            urls = ["https://github.com/cgdolan/files/blob/master/puller_arm64?raw=true"]
         )
 
     if "go_puller_darwin" not in excludes:

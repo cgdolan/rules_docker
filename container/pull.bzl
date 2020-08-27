@@ -65,9 +65,15 @@ _container_pull_attrs = {
         cfg = "host",
         doc = "(optional) Exposed to provide a way to test other pullers on macOS",
     ),
-    "puller_linux": attr.label(
+    "puller_linux_amd64": attr.label(
         executable = True,
-        default = Label("@go_puller_linux//file:downloaded"),
+        default = Label("@go_puller_linux_amd64//file:downloaded"),
+        cfg = "host",
+        doc = "(optional) Exposed to provide a way to test other pullers on Linux",
+    ),
+    "puller_linux_arm64": attr.label(
+        executable = True,
+        default = Label("@go_puller_linux_arm64//file:downloaded"),
         cfg = "host",
         doc = "(optional) Exposed to provide a way to test other pullers on Linux",
     ),
@@ -86,6 +92,22 @@ _container_pull_attrs = {
     ),
 }
 
+def _puller(repository_ctx):
+    default = repository_ctx.attr.puller_linux_amd64
+
+    if repository_ctx.os.name.lower().startswith("mac os"):
+        return repository_ctx.attr.puller_darwin
+
+    uname_result = repository_ctx.execute(["uname", "-m"])
+    if uname_result.return_code:
+        return default
+
+    architecture = uname_result.stdout.strip().lower()
+    if architecture == "aarch64":
+        return repository_ctx.attr.puller_linux_arm64
+
+    return default
+
 def _impl(repository_ctx):
     """Core implementation of container_pull."""
 
@@ -97,12 +119,8 @@ def _impl(repository_ctx):
 
     import_rule_tags = "[\"{}\"]".format("\", \"".join(repository_ctx.attr.import_tags))
 
-    puller = repository_ctx.attr.puller_linux
-    if repository_ctx.os.name.lower().startswith("mac os"):
-        puller = repository_ctx.attr.puller_darwin
-
     args = [
-        repository_ctx.path(puller),
+        repository_ctx.path(_puller(repository_ctx)),
         "-directory",
         repository_ctx.path("image"),
         "-os",
