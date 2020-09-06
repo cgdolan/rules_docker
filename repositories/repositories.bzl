@@ -25,7 +25,7 @@ load(
 
 # The release of the github.com/google/containerregistry to consume.
 CONTAINERREGISTRY_RELEASE = "v0.0.36"
-RULES_DOCKER_GO_BINARY_RELEASE = "fdebd6e0b6c9185a115379166c1c067f88d53630"
+RULES_DOCKER_GO_BINARY_RELEASE = "1fb7602779ee289ed67eb221d9f9a63d127f940b"
 
 def repositories():
     """Download dependencies of container rules."""
@@ -36,7 +36,7 @@ def repositories():
         http_file(
             name = "go_puller_linux_amd64",
             executable = True,
-            sha256 = "1bcbbf86972cde8448dfab770a686801c46a1739f68f1d7a5373a4f0c3954846",
+            sha256 = "e6a20d7c29c484ff649dff477d4fa0b960e158dcf30b3142354e6fc800107172",
             urls = [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/puller-linux-amd64")]
         )
 
@@ -44,15 +44,15 @@ def repositories():
         http_file(
             name = "go_puller_linux_arm64",
             executable = True,
-            sha256 = "35a1076c7aeadcfe7cc8d5817d0cd9a06137440a0dec975fa5fc49e85df8afba",
-            urls = ["https://github.com/cgdolan/files/blob/master/puller_arm64?raw=true"]
+            sha256 = "2fdb37010c8fbe88193e06431d6168ac2d6886598a44713ee823afd8e6e6fca9",
+            urls = [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/puller-linux-arm64")]
         )
 
     if "go_puller_darwin" not in excludes:
         http_file(
             name = "go_puller_darwin",
             executable = True,
-            sha256 = "62b405511624528ba5b2716b1b93b5591c41edeca57195efc62da14001441c44",
+            sha256 = "65dc53606891df922a4bc3e1a4cf40d7f2de17a9d38f34edc6732243d5678895",
             urls = [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/puller-darwin-amd64")],
         )
 
