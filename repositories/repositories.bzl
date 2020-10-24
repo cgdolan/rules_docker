@@ -32,19 +32,27 @@ def repositories():
     excludes = native.existing_rules().keys()
 
     # Go binaries.
-    if "go_puller_linux" not in excludes:
+    if "go_puller_linux_amd64" not in excludes:
         http_file(
-            name = "go_puller_linux",
+            name = "go_puller_linux_amd64",
             executable = True,
             sha256 = "1bcbbf86972cde8448dfab770a686801c46a1739f68f1d7a5373a4f0c3954846",
-            urls = [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/puller-linux-amd64")],
+            urls = [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/puller-linux-amd64")]
+        )
+
+    if "go_puller_linux_arm64" not in excludes:
+        http_file(
+            name = "go_puller_linux_arm64",
+            executable = True,
+            sha256 = "98686e602b5f75bbceb801ca315617579ad9ffe9e2df66d49673ea35a7e1f343",
+            urls = [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/puller-linux-arm64")]
         )
 
     if "go_puller_darwin" not in excludes:
         http_file(
             name = "go_puller_darwin",
             executable = True,
-            sha256 = "62b405511624528ba5b2716b1b93b5591c41edeca57195efc62da14001441c44",
+            sha256 = "98686e602b5f75bbceb801ca315617579ad9ffe9e2df66d49673ea35a7e1f343",
             urls = [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/puller-darwin-amd64")],
         )
 
