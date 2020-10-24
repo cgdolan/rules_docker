@@ -36,7 +36,7 @@ def repositories():
         http_file(
             name = "go_puller_linux_amd64",
             executable = True,
-            sha256 = "e6a20d7c29c484ff649dff477d4fa0b960e158dcf30b3142354e6fc800107172",
+            sha256 = "1bcbbf86972cde8448dfab770a686801c46a1739f68f1d7a5373a4f0c3954846",
             urls = [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/puller-linux-amd64")]
         )
 
@@ -44,7 +44,7 @@ def repositories():
         http_file(
             name = "go_puller_linux_arm64",
             executable = True,
-            sha256 = "2fdb37010c8fbe88193e06431d6168ac2d6886598a44713ee823afd8e6e6fca9",
+            sha256 = "98686e602b5f75bbceb801ca315617579ad9ffe9e2df66d49673ea35a7e1f343",
             urls = [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/puller-linux-arm64")]
         )
 
@@ -52,7 +52,7 @@ def repositories():
         http_file(
             name = "go_puller_darwin",
             executable = True,
-            sha256 = "65dc53606891df922a4bc3e1a4cf40d7f2de17a9d38f34edc6732243d5678895",
+            sha256 = "98686e602b5f75bbceb801ca315617579ad9ffe9e2df66d49673ea35a7e1f343",
             urls = [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/puller-darwin-amd64")],
         )
 
